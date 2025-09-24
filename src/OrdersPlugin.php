@@ -11,7 +11,7 @@ use Mortezaa97\Orders\Filament\Resources\Orders\OrderResource;
 use Mortezaa97\Orders\Filament\Resources\PayTypes\PayTypeResource;
 use Mortezaa97\Orders\Filament\Resources\SendTypes\SendTypeResource;
 
-class OrderPlugin implements Plugin
+class OrdersPlugin implements Plugin
 {
     public static function make(): static
     {
