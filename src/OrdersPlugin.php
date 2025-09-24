@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Mortezaa97\Order;
+namespace Mortezaa97\Orders;
 
 use Filament\Contracts\Plugin;
 use Filament\Panel;
