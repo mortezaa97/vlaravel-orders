@@ -1,0 +1,35 @@
+<?php
+
+namespace Mortezaa97\Orders\Http\Resources;
+
+use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
+use Mortezaa97\Orders\Http\Resources\CartProductResource;
+
+class CartResource extends JsonResource
+{
+    /**
+     * Transform the resource into an array.
+     *
+     * @return array<string, mixed>
+     */
+    public function toArray(Request $request): array
+    {
+        return [
+            'storage_id' => $this->storage_id,
+            'status' => $this->status,
+            'address_id' => $this->address_id,
+            'coupon' => $this->coupon(),
+            'desc' => $this->desc,
+            'products' => CartProductResource::collection($this->products),
+            'discount_price' => $this->discount_price,
+            'total_count' => $this->total_count,
+            'send_price' => $this->send_price,
+            'tax_price' => $this->tax_price,
+            'payable_price' => $this->payable_price,
+            'total_price' => $this->total_price,
+            'send_type' => $this->sendType,
+            'pay_type' => $this->payType,
+        ];
+    }
+}
