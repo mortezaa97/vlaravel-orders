@@ -22,7 +22,14 @@ class OrderResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
-    protected static ?string $recordTitleAttribute = 'Order';
+    protected static ?string $navigationLabel = 'سفارشات';
+
+    protected static ?string $modelLabel = 'سفارش';
+
+    protected static ?string $pluralModelLabel = 'سفارشات';
+
+    protected static string|null|\UnitEnum $navigationGroup = 'فروشگاه';
+    protected static ?string $recordTitleAttribute = 'سفارشات';
 
     public static function form(Schema $schema): Schema
     {
