@@ -7,6 +7,8 @@ use Mortezaa97\Orders\Http\Controllers\Cart\PayCartController;
 use Mortezaa97\Orders\Http\Controllers\CartController;
 use Mortezaa97\Orders\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
+use Mortezaa97\Orders\Http\Controllers\PayTypeController;
+use Mortezaa97\Orders\Http\Controllers\SendTypeController;
 
 Route::prefix('api')->group(function () {
     Route::get('carts', [CartController::class, 'index'])->middleware('auth:api')->name('carts.index');
@@ -19,5 +21,12 @@ Route::prefix('api')->group(function () {
 
     Route::get('orders', [OrderController::class, 'index'])->middleware('auth:api')->name('orders.index');
     Route::get('orders/{order}', [OrderController::class, 'show'])->name('orders.show');
+
+    Route::get('send/types', [SendTypeController::class, 'index'])->name('sendTypes.index');
+    Route::get('send/types/{sendType}', [SendTypeController::class, 'show'])->name('sendTypes.show');
+
+    Route::get('pay/types', [PayTypeController::class, 'index'])->name('payTypes.index');
+    Route::get('pay/types/{payType}', [PayTypeController::class, 'show'])->name('payTypes.show');
+
 });
 
