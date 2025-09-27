@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 use Mortezaa97\Orders\Http\Controllers\PayTypeController;
 use Mortezaa97\Orders\Http\Controllers\SendTypeController;
 
-Route::prefix('api')->group(function () {
+Route::prefix('api')->middleware('api')->group(function () {
     Route::get('carts', [CartController::class, 'index'])->middleware('auth:api')->name('carts.index');
     Route::get('carts/{cart}', [CartController::class, 'show'])->name('carts.show');
     Route::post('carts', [CartController::class, 'store'])->name('carts.store');
