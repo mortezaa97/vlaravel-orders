@@ -31,6 +31,11 @@ class SendTypesSeeder extends Seeder
             ],
         ];
 
-        SendType::updateOrCreate($sendTypes);
+        foreach ($sendTypes as $payType) {
+            SendType::updateOrCreate(
+                ['title' => $payType['title']],
+                $payType
+            );
+        }
     }
 }

@@ -43,6 +43,11 @@ class PayTypesSeeder extends Seeder
             ],
         ];
 
-        PayType::updateOrCreate($payTypes);
+        foreach ($payTypes as $payType) {
+            PayType::updateOrCreate(
+                ['title' => $payType['title']],
+                $payType
+            );
+        }
     }
 }
