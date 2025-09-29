@@ -14,10 +14,17 @@ You can install the package via composer:
 composer require mortezaa97/orders
 ```
 
+```bash
+php artisan vendor:publish --tag=orders-seeders
+```
+
 ## Usage
 
 ```php
-// Usage description here
+PayTypesSeeder::class,
+SendTypesSeeder::class,
+CartsTableSeeder::class,
+OrdersTableSeeder::class,
 ```
 
 ### Testing
