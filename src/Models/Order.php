@@ -31,12 +31,6 @@ class Order extends Model
         });
         static::creating(function ($item) {
             $item->code = mt_rand(100000, 999999);
-
-            $item->setStatus($item->getAttribute('status'));
-        });
-
-        static::updating(function ($item) {
-            $item->setStatus($item->getAttribute('status'));
         });
 
 //        static::observe(OrderObserver::class);
