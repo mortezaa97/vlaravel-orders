@@ -17,6 +17,9 @@ class CartService
         try {
             DB::beginTransaction();
             $product = Product::where('id', $product_id)->withTrashed()->firstOrFail();
+            if (!$product->parent_id)
+                throw new Exception('امکان اضافه کردن این محصول به سبد خرید وجود ندارد لطفا تنوع محصول را انتخاب کنید.', 400);
+
             if ($product->quantity < $count) {
                 throw new Exception('موجودی کالا کافی نیست', 400);
             }
