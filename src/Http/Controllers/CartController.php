@@ -16,6 +16,7 @@ use Mortezaa97\Orders\Http\Resources\CartResource;
 use Mortezaa97\Orders\Models\Cart;
 use Mortezaa97\Orders\Models\SendType;
 use Mortezaa97\Orders\Services\CartService;
+use function Amp\Promise\first;
 
 class CartController extends Controller
 {
@@ -52,7 +53,7 @@ class CartController extends Controller
             $cartService->updateCart($cart, $request->product_id, $request->count);
 
             DB::commit();
-            $cart->load('products')->refresh();
+            $cart->refresh();
 
             return new CartResource($cart);
         } catch (Exception $exception) {

@@ -19,9 +19,8 @@ class OrderResource extends JsonResource
             'status' => $this->status,
             'address' => $this->address,
             'code' => $this->code,
-            'coupon_id' => $this->coupon_id,
+            'coupon' => $this->coupon,
             'desc' => $this->desc,
-            'variations' => CartProductResource::collection($this->products),
             'total_count' => $this->total_count,
             'created_at' => $this->created_at,
             'send_price' => $this->send_price,
@@ -35,8 +34,8 @@ class OrderResource extends JsonResource
             'payments' => $this->payments,
             'user_name' => $this->user?->full_name,
             'user_cellphone' => $this->user?->cellphone,
-            'coupon' => $this->coupon,
             'tracking_code' => $this->tracking_code,
+            'products' => CartProductResource::collection($this->products),
         ];
     }
 }

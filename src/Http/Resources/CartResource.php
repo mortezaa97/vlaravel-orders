@@ -19,9 +19,8 @@ class CartResource extends JsonResource
             'storage_id' => $this->storage_id,
             'status' => $this->status,
             'address_id' => $this->address_id,
-            'coupon' => $this->coupon(),
+            'coupon' => $this->coupon,
             'desc' => $this->desc,
-            'products' => CartProductResource::collection($this->products),
             'discount_price' => $this->discount_price,
             'total_count' => $this->total_count,
             'send_price' => $this->send_price,
@@ -30,6 +29,7 @@ class CartResource extends JsonResource
             'total_price' => $this->total_price,
             'send_type' => $this->sendType,
             'pay_type' => $this->payType,
+            'products' => CartProductResource::collection($this->products),
         ];
     }
 }

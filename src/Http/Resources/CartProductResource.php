@@ -27,7 +27,7 @@ class CartProductResource extends JsonResource
             'image' => url($this->product?->parent?->image),
             'slug' => $this->product?->parent?->slug,
             'code' => $this->product?->parent?->code,
-            'product' => new ProductSimpleResource($this->product),
+            'variant' => new ProductSimpleResource($this->product),
         ];
     }
 }

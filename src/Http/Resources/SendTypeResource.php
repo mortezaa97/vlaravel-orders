@@ -18,7 +18,7 @@ class SendTypeResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'desc' => $this->desc,
-            'logo' => url($this->logo),
+            'logo' => $this->logo ? url($this->logo) : null,
             'default_price' => $this->default_price,
         ];
     }
