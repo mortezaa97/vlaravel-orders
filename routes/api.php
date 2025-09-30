@@ -13,7 +13,7 @@ use Mortezaa97\Orders\Http\Controllers\SendTypeController;
 Route::prefix('api')->middleware('api')->group(function () {
     Route::get('carts', [CartController::class, 'index'])->middleware('auth:api')->name('carts.index');
     Route::get('carts/{cart}', [CartController::class, 'show'])->name('carts.show');
-    Route::post('carts', [CartController::class, 'store'])->name('carts.store');
+    Route::post('carts', [CartController::class, 'store'])->middleware('auth:api')->name('carts.store');
     Route::post('merge-carts/{cart:storage_id}', MergeCartController::class)->middleware('auth:api')->name('carts.merge');
     Route::match(['put', 'patch'], 'carts/{cart}', [CartController::class, 'update'])->name('carts.update');
     Route::delete('carts/{cart}', [CartController::class, 'destroy'])->name('carts.destroy');

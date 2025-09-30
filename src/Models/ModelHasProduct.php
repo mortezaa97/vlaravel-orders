@@ -2,11 +2,13 @@
 
 namespace Mortezaa97\Orders\Models;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 use Illuminate\Database\Eloquent\Builder;
+use Mortezaa97\Shop\Models\Product;
 
 class ModelHasProduct extends Model
 {

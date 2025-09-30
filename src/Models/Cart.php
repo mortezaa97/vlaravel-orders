@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Mortezaa97\Orders\Models;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -41,7 +42,7 @@ class Cart extends Model
 
     public function getTotalCountAttribute()
     {
-        return $this->variations()->sum('count');
+        return $this->products()->sum('count');
     }
 
     public function getSendPriceAttribute()
@@ -57,7 +58,7 @@ class Cart extends Model
 
     public function getTotalPriceAttribute()
     {
-        return $this->variations->sum(function ($item) {
+        return $this->products->sum(function ($item) {
             return $item->price * $item->count;
         });
     }

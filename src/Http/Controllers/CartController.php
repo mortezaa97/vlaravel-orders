@@ -37,6 +37,7 @@ class CartController extends Controller
             $item = new Cart;
             $data = $request->only($item->fillable);
 
+            $data['created_by'] = Auth::guard('api')->user()?->id;
             if (! isset($data['send_type_id'])) {
                 // TODO: get it dynamically from settings
                 $sendType = SendType::first();
@@ -51,7 +52,7 @@ class CartController extends Controller
             $cartService->updateCart($cart, $request->product_id, $request->count);
 
             DB::commit();
-            $cart->refresh();
+            $cart->load('products')->refresh();
 
             return new CartResource($cart);
         } catch (Exception $exception) {
