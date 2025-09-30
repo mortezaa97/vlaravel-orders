@@ -21,8 +21,8 @@ class PayCartController extends Controller
     {
         try {
             DB::beginTransaction();
-            if (! $cart->create_by) {
-                $cart->update(['create_by' => Auth::user()->id]);
+            if (! $cart->created_by) {
+                $cart->update(['created_by' => Auth::user()->id]);
                 $cart->refresh();
             }
             $orderService = new OrderService;

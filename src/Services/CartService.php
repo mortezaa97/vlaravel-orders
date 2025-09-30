@@ -1,31 +1,33 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Mortezaa97\Orders\Services;
 
+use Exception;
 use Illuminate\Support\Facades\DB;
 use Mortezaa97\Orders\Models\Cart;
-use Mortezaa97\Orders\Models\ModelProduct;
-use Mortezaa97\Orders\Models\Variant;
+use Mortezaa97\Orders\Models\ModelHasProduct;
+use Mortezaa97\Shop\Models\Product;
 
 class CartService
 {
-    public function updateCart(Cart $cart, $variant_id, $count, $price = null)
+    public function updateCart(Cart $cart, $product_id, $count, $price = null)
     {
         try {
             DB::beginTransaction();
-            // AK47: handle using categories not using withTrashed
-            $variant = Variant::where('id', $variant_id)->withTrashed()->firstOrFail();
-            if ($variant->quantity < $count) {
-                throw new \Exception('موجودی کالا کافی نیست', 400);
+            $product = Product::where('id', $product_id)->withTrashed()->firstOrFail();
+            if ($product->quantity < $count) {
+                throw new Exception('موجودی کالا کافی نیست', 400);
             }
 
-            $modelProduct = ModelProduct::updateOrCreate([
-                'variant_id' => $variant->id,
+            $modelProduct = ModelHasProduct::updateOrCreate([
+                'product_id' => $product->id,
                 'model_type' => Cart::class,
                 'model_id' => $cart->id,
             ], [
                 'count' => $count,
-                'price' => $price || $variant->on_sale ? $variant->sale_price ?? $variant->price : $variant->price,
+                'price' => $price || $product->on_sale ? $product->sale_price ?? $product->price : $product->price,
             ]);
             if (! $modelProduct->wasRecentlyCreated) {
                 if ($count == 0) {
@@ -37,7 +39,7 @@ class CartService
                 ]);
             }
             DB::commit();
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             throw $exception;
         }
     }
@@ -46,25 +48,25 @@ class CartService
     {
         try {
             DB::beginTransaction();
-            foreach ($storageCart->variations as $storageVariation) {
-                foreach ($userCart->variations as $userVariation) {
+            foreach ($storageCart->products as $storageVariation) {
+                foreach ($userCart->products as $userVariation) {
                     if ($storageVariation->id == $userVariation->id) {
-                        $variant = Variant::where('id', $storageVariation->id)->firstOrFail();
+                        $product = Product::where('id', $storageVariation->id)->firstOrFail();
                         $userVariation->update([
                             'model_type' => Cart::class,
                             'model_id' => $userCart->id,
                             'count' => $userVariation->count + $storageVariation->count,
-                            'price' => $variant->sale_price ?: $variant->price,
+                            'price' => $product->sale_price ?: $product->price,
                         ]);
                         $storageVariation->delete();
                     }
                 }
-                $storageCart->variations()->update([
+                $storageCart->products()->update([
                     'model_id' => $userCart->id,
                 ]);
             }
             DB::commit();
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return $exception;
         }
     }
@@ -75,7 +77,7 @@ class CartService
             DB::beginTransaction();
             $cart->delete();
             DB::commit();
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return $exception;
         }
     }
@@ -86,20 +88,20 @@ class CartService
             DB::beginTransaction();
             $weight = 0;
             foreach ($userCart->variations as $variant) {
-                $item_weight = $variant?->variant?->product?->weight * $variant->count;
+                $item_weight = $variant?->product?->weight * $variant->count;
                 $weight += $item_weight;
             }
             $county = $userCart->address?->county?->tapin_code;
             $province = $userCart->address?->county?->province?->tapin_code;
             if (! $county || ! $province) {
-                throw new \Exception('شهر یا استان خارج از سرویس است');
+                throw new Exception('شهر یا استان خارج از سرویس است');
             }
 
             $tapinService = new TapinService;
             $data = $tapinService->check($weight, $county, $province);
 
             return $data;
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return $exception;
         }
     }
