@@ -29,7 +29,7 @@ class CartResource extends JsonResource
             'total_price' => $this->total_price,
             'send_type' => $this->sendType,
             'pay_type' => $this->payType,
-            'products' => CartProductResource::collection($this->products),
+            'products' => CartProductResource::collection($this->products->load('product.parent','product.reviews')),
         ];
     }
 }
