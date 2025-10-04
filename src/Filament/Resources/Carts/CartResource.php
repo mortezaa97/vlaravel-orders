@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Mortezaa97\Orders\Filament\Resources\Carts;
 
-use Mortezaa97\Orders\Models\Cart;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
@@ -17,6 +16,7 @@ use Mortezaa97\Orders\Filament\Resources\Carts\Pages\EditCart;
 use Mortezaa97\Orders\Filament\Resources\Carts\Pages\ListCarts;
 use Mortezaa97\Orders\Filament\Resources\Carts\Schemas\CartForm;
 use Mortezaa97\Orders\Filament\Resources\Carts\Tables\CartsTable;
+use Mortezaa97\Orders\Models\Cart;
 
 class CartResource extends Resource
 {

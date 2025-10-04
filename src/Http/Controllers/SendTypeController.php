@@ -1,18 +1,23 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Mortezaa97\Orders\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Mortezaa97\Orders\Models\SendType;
-use Illuminate\Http\Request;;
-use Illuminate\Support\Facades\Gate;
+use Exception;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Mortezaa97\Orders\Http\Resources\SendTypeResource;
+use Mortezaa97\Orders\Models\SendType;
+
 class SendTypeController extends Controller
 {
     public function index()
     {
         Gate::authorize('viewAny', SendType::class);
+
         return SendTypeResource::collection(SendType::all());
     }
 
@@ -22,15 +27,17 @@ class SendTypeController extends Controller
         try {
             DB::beginTransaction();
             DB::commit();
-        } catch (\Exception $exception) {
-            return response()->json($exception->getMessage(),419);
+        } catch (Exception $exception) {
+            return response()->json($exception->getMessage(), 419);
         }
+
         return new SendTypeResource($sendType);
     }
 
     public function show(SendType $sendType)
     {
         Gate::authorize('view', $sendType);
+
         return new SendTypeResource($sendType);
     }
 
@@ -40,9 +47,10 @@ class SendTypeController extends Controller
         try {
             DB::beginTransaction();
             DB::commit();
-        } catch (\Exception $exception) {
-            return response()->json($exception->getMessage(),419);
+        } catch (Exception $exception) {
+            return response()->json($exception->getMessage(), 419);
         }
+
         return new SendTypeResource($sendType);
     }
 
@@ -52,9 +60,10 @@ class SendTypeController extends Controller
         try {
             DB::beginTransaction();
             DB::commit();
-        } catch (\Exception $exception) {
-            return response()->json($exception->getMessage(),419);
+        } catch (Exception $exception) {
+            return response()->json($exception->getMessage(), 419);
         }
-        return response()->json("با موفقیت حذف شد");
+
+        return response()->json('با موفقیت حذف شد');
     }
 }

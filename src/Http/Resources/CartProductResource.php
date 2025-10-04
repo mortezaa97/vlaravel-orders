@@ -1,9 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Mortezaa97\Orders\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use Mortezaa97\Orders\Http\Resources\ProductResource;
 use Mortezaa97\Shop\Http\Resources\ProductSimpleResource;
 
 class CartProductResource extends JsonResource

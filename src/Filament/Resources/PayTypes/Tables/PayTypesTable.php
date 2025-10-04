@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Mortezaa97\Orders\Filament\Resources\PayTypes\Tables;
 
 use Filament\Actions\BulkActionGroup;

@@ -16,7 +16,6 @@ use Mortezaa97\Orders\Http\Resources\CartResource;
 use Mortezaa97\Orders\Models\Cart;
 use Mortezaa97\Orders\Models\SendType;
 use Mortezaa97\Orders\Services\CartService;
-use function Amp\Promise\first;
 
 class CartController extends Controller
 {

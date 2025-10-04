@@ -1,10 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Mortezaa97\Orders\Policies;
 
 use Mortezaa97\Orders\Models\Cart;
 use Mortezaa97\Orders\Models\User;
-use Illuminate\Auth\Access\Response;
 
 class CartPolicy
 {

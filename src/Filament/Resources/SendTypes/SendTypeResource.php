@@ -1,13 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Mortezaa97\Orders\Filament\Resources\SendTypes;
 
-use Mortezaa97\Orders\Filament\Resources\SendTypes\Pages\CreateSendType;
-use Mortezaa97\Orders\Filament\Resources\SendTypes\Pages\EditSendType;
-use Mortezaa97\Orders\Filament\Resources\SendTypes\Pages\ListSendTypes;
-use Mortezaa97\Orders\Filament\Resources\SendTypes\Schemas\SendTypeForm;
-use Mortezaa97\Orders\Filament\Resources\SendTypes\Tables\SendTypesTable;
-use Mortezaa97\Orders\Models\SendType;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
@@ -15,6 +11,12 @@ use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Mortezaa97\Orders\Filament\Resources\SendTypes\Pages\CreateSendType;
+use Mortezaa97\Orders\Filament\Resources\SendTypes\Pages\EditSendType;
+use Mortezaa97\Orders\Filament\Resources\SendTypes\Pages\ListSendTypes;
+use Mortezaa97\Orders\Filament\Resources\SendTypes\Schemas\SendTypeForm;
+use Mortezaa97\Orders\Filament\Resources\SendTypes\Tables\SendTypesTable;
+use Mortezaa97\Orders\Models\SendType;
 
 class SendTypeResource extends Resource
 {

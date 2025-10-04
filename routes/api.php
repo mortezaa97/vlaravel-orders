@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
+use Illuminate\Support\Facades\Route;
 use Mortezaa97\Orders\Http\Controllers\Cart\MergeCartController;
 use Mortezaa97\Orders\Http\Controllers\Cart\PayCartController;
 use Mortezaa97\Orders\Http\Controllers\CartController;
 use Mortezaa97\Orders\Http\Controllers\OrderController;
-use Illuminate\Support\Facades\Route;
 use Mortezaa97\Orders\Http\Controllers\PayTypeController;
 use Mortezaa97\Orders\Http\Controllers\SendTypeController;
 
@@ -27,6 +27,4 @@ Route::prefix('api')->middleware('api')->group(function () {
 
     Route::get('pay/types', [PayTypeController::class, 'index'])->name('payTypes.index');
     Route::get('pay/types/{payType}', [PayTypeController::class, 'show'])->name('payTypes.show');
-
 });
-

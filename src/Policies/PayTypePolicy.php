@@ -1,10 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Mortezaa97\Orders\Policies;
 
-use Mortezaa97\Orders\Models\PayType;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
+use Mortezaa97\Orders\Models\PayType;
 
 class PayTypePolicy
 {

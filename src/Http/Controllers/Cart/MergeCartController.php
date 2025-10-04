@@ -1,20 +1,23 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Mortezaa97\Orders\Http\Controllers\Cart;
 
 use App\Http\Controllers\Controller;
-use Mortezaa97\Orders\Http\Resources\CartResource;
-use Mortezaa97\Orders\Models\Cart;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Mortezaa97\Orders\Http\Resources\CartResource;
+use Mortezaa97\Orders\Models\Cart;
 
 class MergeCartController extends Controller
 {
     /**
      * Handle the incoming request.
      */
-    public function __invoke(Request $request,Cart $cart)
+    public function __invoke(Request $request, Cart $cart)
     {
         try {
             DB::beginTransaction();
@@ -30,7 +33,7 @@ class MergeCartController extends Controller
             DB::commit();
 
             return new CartResource(Auth::user()->active_cart);
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return response($exception->getMessage(), 420);
         }
     }
