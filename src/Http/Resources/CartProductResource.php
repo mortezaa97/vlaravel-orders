@@ -1,14 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Mortezaa97\Orders\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-<<<<<<< Updated upstream
-use Mortezaa97\Orders\Http\Resources\ProductResource;
 use Mortezaa97\Shop\Http\Resources\ProductSimpleResource;
-=======
-use Mortezaa97\Shop\Http\Resources\ProductVariantResource;
->>>>>>> Stashed changes
 
 class CartProductResource extends JsonResource
 {
