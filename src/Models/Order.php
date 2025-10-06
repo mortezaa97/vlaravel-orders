@@ -43,7 +43,7 @@ class Order extends Model
 
     public function getTotalCountAttribute()
     {
-        return $this->variations()->sum('count');
+        return $this->products->sum('count');
     }
 
     public function getSendPriceAttribute()
@@ -58,7 +58,7 @@ class Order extends Model
 
     public function getTotalPriceAttribute()
     {
-        return $this->variations->sum(function ($item) {
+        return $this->products->sum(function ($item) {
             return $item->price * $item->count;
         });
     }
@@ -81,7 +81,7 @@ class Order extends Model
         return $this->belongsTo(User::class, 'updated_by');
     }
 
-    public function products()
+    public function products(): \Illuminate\Database\Eloquent\Relations\MorphMany
     {
         return $this->morphMany(ModelHasProduct::class, 'model');
     }

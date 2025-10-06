@@ -7,9 +7,11 @@ namespace Mortezaa97\Orders\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Mortezaa97\Orders\Http\Resources\OrderResource;
+use Mortezaa97\Orders\Http\Resources\OrderSimpleResource;
 use Mortezaa97\Orders\Models\Order;
 
 class OrderController extends Controller
@@ -18,7 +20,8 @@ class OrderController extends Controller
     {
         Gate::authorize('viewAny', Order::class);
 
-        return OrderResource::collection(Order::all());
+        $orders = Order::with(['sendType','payType'])->where('user_id',Auth::user()?->id)->get();
+        return OrderSimpleResource::collection($orders);
     }
 
     public function store(Request $request)
@@ -37,6 +40,8 @@ class OrderController extends Controller
     public function show(Order $order)
     {
         Gate::authorize('view', $order);
+
+        $order->load(['address','coupon','sendType','payType','createdBy','user','payments','products.product.parent','products.product.attributeProducts']);
 
         return new OrderResource($order);
     }
