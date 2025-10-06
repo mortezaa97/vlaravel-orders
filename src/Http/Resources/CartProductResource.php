@@ -6,6 +6,7 @@ namespace Mortezaa97\Orders\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use Mortezaa97\Shop\Http\Resources\ProductSimpleResource;
+use Mortezaa97\Shop\Http\Resources\ProductVariantResource;
 
 class CartProductResource extends JsonResource
 {
@@ -27,7 +28,7 @@ class CartProductResource extends JsonResource
             'image' => url($this->product?->parent?->image),
             'slug' => $this->product?->parent?->slug,
             'code' => $this->product?->parent?->code,
-            'variant' => new ProductSimpleResource($this->product),
+            'variant' => new ProductVariantResource($this->product),
         ];
     }
 }

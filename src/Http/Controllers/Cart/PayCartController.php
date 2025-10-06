@@ -1,10 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Mortezaa97\Orders\Http\Controllers\Cart;
 
 use App\Http\Controllers\Controller;
 use App\Services\PaymentService;
 use App\Services\SmsService;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -17,7 +20,7 @@ class PayCartController extends Controller
     /**
      * Handle the incoming request.
      */
-    public function __invoke(Request $request,Cart $cart)
+    public function __invoke(Request $request, Cart $cart)
     {
         try {
             DB::beginTransaction();
@@ -42,14 +45,14 @@ class PayCartController extends Controller
             // } else {
             $gateway = 'zibal';
             // }
-            $paymentService = new PaymentService();
+            $paymentService = new PaymentService;
             $payment = $paymentService->pay(Auth::user(), $order->payable_price, Order::class, $order->id, $gateway);
             // if ($payType->title === 'پرداخت از کیف پول') {
             //     $order->setStatus('پرداخت شده');
             // }
 
             if ($gateway != "$gateway") {
-                $smsService = new SmsService();
+                $smsService = new SmsService;
                 $smsService->sendVerifyWithKavenegar(
                     $order->user->cellphone,
                     'customerPendingOrder',
@@ -62,7 +65,7 @@ class PayCartController extends Controller
             DB::commit();
 
             return $payment;
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return response($exception, 419);
         }
     }

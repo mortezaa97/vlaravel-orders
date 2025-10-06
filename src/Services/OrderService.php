@@ -1,8 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Mortezaa97\Orders\Services;
 
 use App\Enums\Status;
+use Exception;
 use Illuminate\Support\Facades\DB;
 use Mortezaa97\Addresses\Models\Address;
 use Mortezaa97\Orders\Models\Cart;
@@ -32,9 +35,8 @@ class OrderService
             DB::commit();
 
             return $order;
-
-        } catch (\Exception $exception) {
-            throw new \Exception($exception->getMessage());
+        } catch (Exception $exception) {
+            throw new Exception($exception->getMessage());
         }
     }
 }

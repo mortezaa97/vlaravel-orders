@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Mortezaa97\Orders;
 
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @see \Mortezaa97\Orders\Skeleton\SkeletonClass
+ * @see Skeleton\SkeletonClass
  */
 class OrdersFacade extends Facade
 {

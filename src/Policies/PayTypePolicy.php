@@ -1,19 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Mortezaa97\Orders\Policies;
 
-use Mortezaa97\Orders\Models\PayType;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
+use Mortezaa97\Orders\Models\PayType;
 
 class PayTypePolicy
 {
     /**
      * Determine whether the user can view any models.
      */
-    public function viewAny(User $user): bool
+    public function viewAny(?User $user): bool
     {
-        return $user->hasRole('admin');
+        return true;
     }
 
     /**
@@ -21,7 +22,7 @@ class PayTypePolicy
      */
     public function view(User $user, PayType $payType): bool
     {
-        return $user->id === $payType->created_by || $user->hasRole('admin');
+        return true;
     }
 
     /**

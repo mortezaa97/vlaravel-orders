@@ -1,13 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Mortezaa97\Orders\Filament\Resources\Orders;
 
-use Mortezaa97\Orders\Filament\Resources\Orders\Pages\CreateOrder;
-use Mortezaa97\Orders\Filament\Resources\Orders\Pages\EditOrder;
-use Mortezaa97\Orders\Filament\Resources\Orders\Pages\ListOrders;
-use Mortezaa97\Orders\Filament\Resources\Orders\Schemas\OrderForm;
-use Mortezaa97\Orders\Filament\Resources\Orders\Tables\OrdersTable;
-use Mortezaa97\Orders\Models\Order;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
@@ -15,6 +11,13 @@ use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Mortezaa97\Orders\Filament\Resources\Orders\Pages\CreateOrder;
+use Mortezaa97\Orders\Filament\Resources\Orders\Pages\EditOrder;
+use Mortezaa97\Orders\Filament\Resources\Orders\Pages\ListOrders;
+use Mortezaa97\Orders\Filament\Resources\Orders\Schemas\OrderForm;
+use Mortezaa97\Orders\Filament\Resources\Orders\Tables\OrdersTable;
+use Mortezaa97\Orders\Models\Order;
+use UnitEnum;
 
 class OrderResource extends Resource
 {
@@ -28,7 +31,8 @@ class OrderResource extends Resource
 
     protected static ?string $pluralModelLabel = 'سفارشات';
 
-    protected static string|null|\UnitEnum $navigationGroup = 'فروشگاه';
+    protected static string|null|UnitEnum $navigationGroup = 'فروشگاه';
+
     protected static ?string $recordTitleAttribute = 'سفارشات';
 
     public static function form(Schema $schema): Schema

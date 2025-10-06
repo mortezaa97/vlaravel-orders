@@ -1,9 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Mortezaa97\Orders\Policies;
 
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 use Mortezaa97\Orders\Models\SendType;
 
 class SendTypePolicy
@@ -11,9 +12,9 @@ class SendTypePolicy
     /**
      * Determine whether the user can view any models.
      */
-    public function viewAny(User $user): bool
+    public function viewAny(?User $user): bool
     {
-        return $user->hasRole('admin');
+        return true;
     }
 
     /**
@@ -21,7 +22,7 @@ class SendTypePolicy
      */
     public function view(User $user, SendType $sendType): bool
     {
-        return $user->id === $sendType->created_by || $user->hasRole('admin');
+        return true;
     }
 
     /**

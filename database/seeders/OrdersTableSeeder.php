@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Seeders;
 
 use App\Enums\Status;
@@ -26,19 +28,19 @@ class OrdersTableSeeder extends Seeder
         $productIds = DB::table('products')->pluck('id')->toArray();
 
         for ($i = 0; $i < 10; $i++) {
-            $userId = !empty($userIds) ? $faker->randomElement($userIds) : 2;
+            $userId = ! empty($userIds) ? $faker->randomElement($userIds) : 2;
             $userAddresses = DB::table('addresses')->where('created_by', $userId)->pluck('id')->toArray();
-            $addressId = !empty($userAddresses) ? $faker->randomElement($userAddresses) : 1;
-            $couponId = !empty($couponIds) ? $faker->randomElement($couponIds) : null;
-            $sendTypeId = !empty($sendTypeIds) ? $faker->randomElement($sendTypeIds) : 1;
-            $payTypeId = !empty($payTypeIds) ? $faker->randomElement($payTypeIds) : 1;
+            $addressId = ! empty($userAddresses) ? $faker->randomElement($userAddresses) : 1;
+            $couponId = ! empty($couponIds) ? $faker->randomElement($couponIds) : null;
+            $sendTypeId = ! empty($sendTypeIds) ? $faker->randomElement($sendTypeIds) : 1;
+            $payTypeId = ! empty($payTypeIds) ? $faker->randomElement($payTypeIds) : 1;
 
             $numProducts = $faker->numberBetween(1, 4);
             $productItems = [];
             $subtotal = 0;
 
             for ($j = 0; $j < $numProducts; $j++) {
-                $productId = !empty($productIds) ? $faker->randomElement($productIds) : 1;
+                $productId = ! empty($productIds) ? $faker->randomElement($productIds) : 1;
                 $price = $faker->randomFloat(0, 0, 50000, 500000); // e.g., in toman
                 $count = $faker->numberBetween(1, 5);
                 $productItems[] = [
@@ -61,7 +63,6 @@ class OrdersTableSeeder extends Seeder
             $couponPrice = $couponId ? $faker->randomFloat(0, 0, 0, min($subtotal * 0.5, 100000)) : 0;
             $totalPrice = $subtotal + $deliveryPrice - $couponPrice;
 
-
             $orderData = [
                 'code' => 'ORD-' . strtoupper($faker->regexify('[A-Z0-9]{6}')),
                 'user_id' => $userId,
@@ -71,7 +72,7 @@ class OrdersTableSeeder extends Seeder
                 'coupon_price' => $couponPrice,
                 'total_price' => $totalPrice,
                 'payment_type' => $faker->randomElement([
-                    0//'online',1//'pos',2//'credit'
+                    0, // 'online',1//'pos',2//'credit'
                 ]),
                 'desc' => $faker->realText(200),
                 'tracking_code' => $faker->regexify('[A-Z]{2}\d{9}[A-Z]{2}'),

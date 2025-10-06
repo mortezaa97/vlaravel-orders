@@ -1,13 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Mortezaa97\Orders\Filament\Resources\PayTypes;
 
-use Mortezaa97\Orders\Filament\Resources\PayTypes\Pages\CreatePayType;
-use Mortezaa97\Orders\Filament\Resources\PayTypes\Pages\EditPayType;
-use Mortezaa97\Orders\Filament\Resources\PayTypes\Pages\ListPayTypes;
-use Mortezaa97\Orders\Filament\Resources\PayTypes\Schemas\PayTypeForm;
-use Mortezaa97\Orders\Filament\Resources\PayTypes\Tables\PayTypesTable;
-use Mortezaa97\Orders\Models\PayType;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
@@ -15,6 +11,12 @@ use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Mortezaa97\Orders\Filament\Resources\PayTypes\Pages\CreatePayType;
+use Mortezaa97\Orders\Filament\Resources\PayTypes\Pages\EditPayType;
+use Mortezaa97\Orders\Filament\Resources\PayTypes\Pages\ListPayTypes;
+use Mortezaa97\Orders\Filament\Resources\PayTypes\Schemas\PayTypeForm;
+use Mortezaa97\Orders\Filament\Resources\PayTypes\Tables\PayTypesTable;
+use Mortezaa97\Orders\Models\PayType;
 
 class PayTypeResource extends Resource
 {

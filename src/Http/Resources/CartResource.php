@@ -1,10 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Mortezaa97\Orders\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Mortezaa97\Orders\Http\Resources\CartProductResource;
 
 class CartResource extends JsonResource
 {
@@ -29,7 +30,7 @@ class CartResource extends JsonResource
             'total_price' => $this->total_price,
             'send_type' => $this->sendType,
             'pay_type' => $this->payType,
-            'products' => CartProductResource::collection($this->products->load('product.parent','product.reviews')),
+            'products' => CartProductResource::collection($this->products->load('product.parent', 'product.reviews', 'product.attributeProducts')),
         ];
     }
 }

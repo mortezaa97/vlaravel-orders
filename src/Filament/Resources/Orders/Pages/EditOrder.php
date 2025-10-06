@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Mortezaa97\Orders\Filament\Resources\Orders\Pages;
 
-use Mortezaa97\Orders\Filament\Resources\Orders\OrderResource;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\ForceDeleteAction;
 use Filament\Actions\RestoreAction;
 use Filament\Resources\Pages\EditRecord;
+use Mortezaa97\Orders\Filament\Resources\Orders\OrderResource;
 
 class EditOrder extends EditRecord
 {

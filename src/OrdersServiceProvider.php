@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Mortezaa97\Orders;
 
 use Illuminate\Support\Facades\Gate;
@@ -53,7 +55,7 @@ class OrdersServiceProvider extends ServiceProvider
     public function register()
     {
         // Automatically apply the package configuration
-        $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'orders');
+        $this->mergeConfigFrom(__DIR__ . '/../config/config.php', 'orders');
 
         // Register the main class to use with the facade
         $this->app->singleton('orders', function () {
