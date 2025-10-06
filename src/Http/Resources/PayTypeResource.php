@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Mortezaa97\Orders\Http\Resources;
 
 use Illuminate\Http\Request;
@@ -14,7 +16,9 @@ class PayTypeResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return ['title' => $this->title,
+        return [
+            'id' => $this->id,
+            'title' => $this->title,
             'desc' => $this->desc,
             'logo' => $this->logo ? url($this->logo) : null,
         ];
