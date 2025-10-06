@@ -20,7 +20,8 @@ class OrderController extends Controller
     {
         Gate::authorize('viewAny', Order::class);
 
-        $orders = Order::with(['sendType','payType'])->where('user_id',Auth::user()?->id)->get();
+        $orders = Order::with(['sendType', 'payType'])->where('user_id', Auth::user()?->id)->get();
+
         return OrderSimpleResource::collection($orders);
     }
 
@@ -41,7 +42,7 @@ class OrderController extends Controller
     {
         Gate::authorize('view', $order);
 
-        $order->load(['address','coupon','sendType','payType','createdBy','user','payments','products.product.parent','products.product.attributeProducts']);
+        $order->load(['address', 'coupon', 'sendType', 'payType', 'createdBy', 'user', 'payments', 'products.product.parent', 'products.product.attributeProducts']);
 
         return new OrderResource($order);
     }

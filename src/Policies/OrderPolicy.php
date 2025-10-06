@@ -22,7 +22,7 @@ class OrderPolicy
      */
     public function view(User $user, Order $order): bool
     {
-        return $user->id === $order->created_by || $user->hasRole('admin');
+        return $user->id === $order->user_id || $user->hasRole('admin');
     }
 
     /**
