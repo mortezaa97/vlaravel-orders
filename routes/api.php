@@ -20,7 +20,7 @@ Route::prefix('api')->middleware('api')->group(function () {
     Route::post('pay/carts/{cart:storage_id}', PayCartController::class)->middleware('auth:api')->name('carts.pay');
 
     Route::get('orders', [OrderController::class, 'index'])->middleware('auth:api')->name('orders.index');
-    Route::get('orders/{order:code}', [OrderController::class, 'show'])->name('orders.show');
+    Route::get('orders/{order:code}', [OrderController::class, 'show'])->middleware('auth:api')->name('orders.show');
 
     Route::get('send/types', [SendTypeController::class, 'index'])->name('sendTypes.index');
     Route::get('send/types/{sendType}', [SendTypeController::class, 'show'])->name('sendTypes.show');
