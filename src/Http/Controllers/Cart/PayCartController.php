@@ -66,7 +66,7 @@ class PayCartController extends Controller
 
             return $payment;
         } catch (Exception $exception) {
-            return response($exception, 419);
+            return response()->json($exception, 419);
         }
     }
 }

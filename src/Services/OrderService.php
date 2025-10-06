@@ -29,9 +29,9 @@ class OrderService
                 'send_type_id' => $cart->send_type_id ? $cart->send_type_id : null,
                 'pay_type_id' => $cart->pay_type_id ? $cart->pay_type_id : null,
             ];
-            $data['status'] = Status::PENDING;
+            $data['status'] = Status::PENDING->value;
             $order = Order::create($data);
-            $variations = $order->products()->createMany($cart->products()->get()->toArray());
+            $order->products()->createMany($cart->products()->get()->toArray());
             DB::commit();
 
             return $order;
