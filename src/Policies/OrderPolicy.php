@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Mortezaa97\Orders\Policies;
 
+use App\Models\User;
 use Mortezaa97\Orders\Models\Order;
-use Mortezaa97\Orders\Models\User;
 
 class OrderPolicy
 {

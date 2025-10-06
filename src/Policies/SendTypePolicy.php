@@ -14,7 +14,7 @@ class SendTypePolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->hasRole('admin');
+        return true;
     }
 
     /**
@@ -22,7 +22,7 @@ class SendTypePolicy
      */
     public function view(User $user, SendType $sendType): bool
     {
-        return $user->id === $sendType->created_by || $user->hasRole('admin');
+        return true;
     }
 
     /**

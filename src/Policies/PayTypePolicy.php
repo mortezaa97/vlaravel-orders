@@ -14,7 +14,7 @@ class PayTypePolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->hasRole('admin');
+        return true;
     }
 
     /**
@@ -22,7 +22,7 @@ class PayTypePolicy
      */
     public function view(User $user, PayType $payType): bool
     {
-        return $user->id === $payType->created_by || $user->hasRole('admin');
+        return true;
     }
 
     /**
