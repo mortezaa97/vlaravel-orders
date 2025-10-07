@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace Mortezaa97\Orders\Http\Resources;
 
+use App\Http\Resources\PaymentSimpleResource;
 use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Mortezaa97\Addresses\Http\Resources\AddressResource;
 
 class OrderResource extends JsonResource
 {
@@ -19,7 +21,7 @@ class OrderResource extends JsonResource
     {
         return [
             'status' => $this->status,
-            'address' => $this->address,
+            'address' => AddressResource::make($this->whenLoaded('address')),
             'code' => $this->code,
             'coupon' => $this->coupon,
             'desc' => $this->desc,
@@ -31,9 +33,9 @@ class OrderResource extends JsonResource
             'total_price' => $this->total_price,
             'sendType' => SendTypeResource::make($this->whenLoaded('sendType')),
             'payType' => PayTypeResource::make($this->whenLoaded('payType')),
-            'createBy' => $this->createdBy,
+            'createBy' => UserResource::make($this->whenLoaded('createdBy')),
             'user' => UserResource::make($this->whenLoaded('user')),
-            'payments' => $this->payments,
+            'payments' => PaymentSimpleResource::collection($this->whenLoaded('payments')),
             'user_name' => $this->user?->full_name,
             'user_cellphone' => $this->user?->cellphone,
             'tracking_code' => $this->tracking_code,
