@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Mortezaa97\Orders\Http\Resources;
 
+use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -28,10 +29,10 @@ class OrderResource extends JsonResource
             'tax_price' => $this->tax_price,
             'payable_price' => $this->payable_price,
             'total_price' => $this->total_price,
-            'sendType' => $this->sendType,
-            'payType' => $this->payType,
+            'sendType' => SendTypeResource::make($this->whenLoaded('sendType')),
+            'payType' => PayTypeResource::make($this->whenLoaded('payType')),
             'createBy' => $this->createdBy,
-            'user' => $this->user,
+            'user' => UserResource::make($this->whenLoaded('user')),
             'payments' => $this->payments,
             'user_name' => $this->user?->full_name,
             'user_cellphone' => $this->user?->cellphone,
