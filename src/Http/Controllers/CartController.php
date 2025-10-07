@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Mortezaa97\Orders\Http\Controllers;
 
+use App\Enums\Status;
 use App\Http\Controllers\Controller;
 use Exception;
 use Illuminate\Http\Request;
@@ -76,6 +77,7 @@ class CartController extends Controller
                 $addressData = json_decode($request->address, true);
                 $address = Address::create([
                     'created_by' => Auth::user()->id,
+                    'status' => Status::ACTIVE->value,
                     ...$addressData,
                 ]);
                 $data['address_id'] = $address->id;
