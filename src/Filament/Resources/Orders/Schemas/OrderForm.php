@@ -11,38 +11,116 @@ class OrderForm
     public static function configure(Schema $schema): Schema
     {
         return $schema->components([
+            // ستون اصلی - اطلاعات سفارش (8 ستون)
             \Filament\Schemas\Components\Group::make()
                 ->schema([
-                    \Filament\Schemas\Components\Section::make()
+                    // اطلاعات پایه سفارش
+                    \Filament\Schemas\Components\Section::make('اطلاعات پایه سفارش')
+                        ->description('اطلاعات اصلی و شناسه‌های سفارش')
+                        ->icon('heroicon-o-information-circle')
                         ->schema([
-                            \App\Filament\Components\Form\CodeTextInput::create()->required(),
-                            \App\Filament\Components\Form\UserSelect::create()->required(),
-                            \App\Filament\Components\Form\AddressTextInput::create()->required(),
-                            \App\Filament\Components\Form\CouponSelect::create(),
-                            \App\Filament\Components\Form\DeliveryPriceTextInput::create()->required(),
-                            \App\Filament\Components\Form\CouponPriceTextInput::create()->required(),
-                            \App\Filament\Components\Form\TotalPriceTextInput::create()->required(),
-                            \App\Filament\Components\Form\PaymentTypeSelect::create()->required(),
-                            \Filament\Forms\Components\TextInput::make('payment_id'),
-                            \App\Filament\Components\Form\DescTextarea::create(),
-                            \App\Filament\Components\Form\TrackingCodeTextInput::create(),
-                            \Filament\Forms\Components\Select::make('send_type_id')->relationship('sendType', 'title'),
-                            \Filament\Forms\Components\Select::make('pay_type_id')->relationship('payType', 'title'),
-                            \App\Filament\Components\Form\CreatedBySelect::create()->required(),
-                            \App\Filament\Components\Form\UpdatedBySelect::create(),
-
+                            \App\Filament\Components\Form\CodeTextInput::create()
+                                ->required()
+                                ->columnSpan(6),
+                            \App\Filament\Components\Form\UserSelect::create()
+                                ->required()
+                                ->columnSpan(6),
+                            \App\Filament\Components\Form\AddressTextInput::create()
+                                ->required()
+                                ->columnSpan(12),
+                            \App\Filament\Components\Form\DescTextarea::create()
+                                ->columnSpan(12),
                         ])
                         ->columns(12)
-                        ->columnSpan(12),
+                        ->columnSpan(12)
+                        ->collapsible(),
+
+                    // اطلاعات قیمت و پرداخت
+                    \Filament\Schemas\Components\Section::make('قیمت و پرداخت')
+                        ->description('جزئیات قیمت‌گذاری و روش پرداخت')
+                        ->icon('heroicon-o-currency-dollar')
+                        ->schema([
+                            \App\Filament\Components\Form\DeliveryPriceTextInput::create()
+                                ->required()
+                                ->columnSpan(4),
+                            \App\Filament\Components\Form\CouponPriceTextInput::create()
+                                ->required()
+                                ->columnSpan(4),
+                            \App\Filament\Components\Form\TotalPriceTextInput::create()
+                                ->required()
+                                ->columnSpan(4),
+                            \App\Filament\Components\Form\PaymentTypeSelect::create()
+                                ->required()
+                                ->columnSpan(6),
+                            \Filament\Forms\Components\TextInput::make('payment_id')
+                                ->label('شناسه پرداخت')
+                                ->columnSpan(6),
+                            \App\Filament\Components\Form\CouponSelect::create()
+                                ->columnSpan(12),
+                        ])
+                        ->columns(12)
+                        ->columnSpan(12)
+                        ->collapsible(),
+
+                    // اطلاعات ارسال و پیگیری
+                    \Filament\Schemas\Components\Section::make('ارسال و پیگیری')
+                        ->description('روش ارسال و کدهای پیگیری')
+                        ->icon('heroicon-o-truck')
+                        ->schema([
+                            \Filament\Forms\Components\Select::make('send_type_id')
+                                ->label('نوع ارسال')
+                                ->relationship('sendType', 'title')
+                                ->searchable()
+                                ->preload()
+                                ->columnSpan(6),
+                            \Filament\Forms\Components\Select::make('pay_type_id')
+                                ->label('نوع پرداخت')
+                                ->relationship('payType', 'title')
+                                ->searchable()
+                                ->preload()
+                                ->columnSpan(6),
+                            \App\Filament\Components\Form\TrackingCodeTextInput::create()
+                                ->columnSpan(12),
+                        ])
+                        ->columns(12)
+                        ->columnSpan(12)
+                        ->collapsible(),
                 ])
                 ->columns(12)
                 ->columnSpan(8),
+
+            // ستون فرعی - اطلاعات مدیریتی و اضافی (4 ستون)
             \Filament\Schemas\Components\Group::make()
                 ->schema([
-                    \Filament\Schemas\Components\Section::make()
-                        ->schema([])
+                    // اطلاعات مدیریتی
+                    \Filament\Schemas\Components\Section::make('اطلاعات مدیریتی')
+                        ->description('اطلاعات مربوط به مدیریت و ویرایش')
+                        ->icon('heroicon-o-cog-6-tooth')
+                        ->schema([
+                            \App\Filament\Components\Form\CreatedBySelect::create()
+                                ->required()
+                                ->columnSpan(12),
+                            \App\Filament\Components\Form\UpdatedBySelect::create()
+                                ->columnSpan(12),
+                        ])
                         ->columns(12)
-                        ->columnSpan(12),
+                        ->columnSpan(12)
+                        ->collapsible(),
+
+                    // اطلاعات اضافی
+                    \Filament\Schemas\Components\Section::make('اطلاعات اضافی')
+                        ->description('اطلاعات تکمیلی و یادداشت‌ها')
+                        ->icon('heroicon-o-document-text')
+                        ->schema([
+                            \Filament\Forms\Components\Placeholder::make('order_summary')
+                                ->label('خلاصه سفارش')
+                                ->content('اطلاعات سفارش در اینجا نمایش داده می‌شود')
+                                ->columnSpan(12),
+                        ])
+                        ->columns(12)
+                        ->columnSpan(12)
+                        ->collapsible()
+                        ->collapsed(),
                 ])
                 ->columns(12)
                 ->columnSpan(4),
