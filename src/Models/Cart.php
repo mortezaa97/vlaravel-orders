@@ -26,7 +26,7 @@ class Cart extends Model
 
     protected $appends = ['total_count', 'send_price', 'tax_price', 'payable_price', 'total_price', 'discount_price'];
 
-    protected $with = ['products'];
+    protected $with = ['products', 'coupon'];
 
     protected static function boot()
     {
