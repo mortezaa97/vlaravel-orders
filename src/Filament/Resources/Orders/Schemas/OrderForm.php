@@ -27,10 +27,10 @@ class OrderForm
                                 ->columnSpan(6),
                             \App\Filament\Components\Form\StatusSelect::create(\Mortezaa97\Orders\Models\Order::class)
                                 ->required()
-                                ->columnSpan(6),
-                            \App\Filament\Components\Form\AddressTextInput::create()
+                                ->columnSpan(12),
+                            \App\Filament\Components\Form\AddressSelect::create()
                                 ->required()
-                                ->columnSpan(6),
+                                ->columnSpan(12),
                             \App\Filament\Components\Form\DescTextarea::create()
                                 ->columnSpan(12),
                         ])
