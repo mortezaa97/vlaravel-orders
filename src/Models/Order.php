@@ -115,4 +115,11 @@ class Order extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function scopeUnread($query)
+    {
+        return $query
+            ->whereNull('read_by')
+            ->whereNull('read_at');
+    }
 }

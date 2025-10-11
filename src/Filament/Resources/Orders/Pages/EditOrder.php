@@ -9,6 +9,7 @@ use Filament\Actions\DeleteAction;
 use Filament\Actions\ForceDeleteAction;
 use Filament\Actions\RestoreAction;
 use Filament\Resources\Pages\EditRecord;
+use Illuminate\Support\Facades\Auth;
 use Mortezaa97\Orders\Filament\Resources\Orders\OrderResource;
 
 class EditOrder extends EditRecord
@@ -28,5 +29,16 @@ class EditOrder extends EditRecord
             ForceDeleteAction::make(),
             RestoreAction::make(),
         ];
+    }
+
+    public function mount(int|string $record): void
+    {
+        parent::mount($record);
+
+        // Update read_at and read_by when the page is opened
+        $this->record->update([
+            'read_at' => now(),
+            'read_by' => Auth::id(),
+        ]);
     }
 }
