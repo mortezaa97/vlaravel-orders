@@ -25,9 +25,12 @@ class OrderForm
                             \App\Filament\Components\Form\UserSelect::create()
                                 ->required()
                                 ->columnSpan(6),
+                            \App\Filament\Components\Form\StatusSelect::create(\Mortezaa97\Orders\Models\Order::class)
+                                ->required()
+                                ->columnSpan(6),
                             \App\Filament\Components\Form\AddressTextInput::create()
                                 ->required()
-                                ->columnSpan(12),
+                                ->columnSpan(6),
                             \App\Filament\Components\Form\DescTextarea::create()
                                 ->columnSpan(12),
                         ])
@@ -49,12 +52,9 @@ class OrderForm
                             \App\Filament\Components\Form\TotalPriceTextInput::create()
                                 ->required()
                                 ->columnSpan(4),
-                            \App\Filament\Components\Form\PaymentTypeSelect::create()
-                                ->required()
-                                ->columnSpan(6),
                             \Filament\Forms\Components\TextInput::make('payment_id')
                                 ->label('شناسه پرداخت')
-                                ->columnSpan(6),
+                                ->columnSpan(12),
                             \App\Filament\Components\Form\CouponSelect::create()
                                 ->columnSpan(12),
                         ])
@@ -80,6 +80,18 @@ class OrderForm
                                 ->preload()
                                 ->columnSpan(6),
                             \App\Filament\Components\Form\TrackingCodeTextInput::create()
+                                ->columnSpan(12),
+                        ])
+                        ->columns(12)
+                        ->columnSpan(12)
+                        ->collapsible(),
+
+                    // محصولات سفارش
+                    \Filament\Schemas\Components\Section::make('محصولات سفارش')
+                        ->description('مدیریت محصولات و تنوع‌های سفارش')
+                        ->icon('heroicon-o-shopping-cart')
+                        ->schema([
+                            \App\Filament\Components\Form\VariationsRepeater::create()
                                 ->columnSpan(12),
                         ])
                         ->columns(12)
