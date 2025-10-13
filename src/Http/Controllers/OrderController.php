@@ -30,12 +30,13 @@ class OrderController extends Controller
         Gate::authorize('create', Order::class);
         try {
             DB::beginTransaction();
+            // TODO: Implement order creation logic
             DB::commit();
         } catch (Exception $exception) {
             return response()->json($exception->getMessage(), 419);
         }
 
-        return new OrderResource($order);
+        return response()->json('سفارش با موفقیت ثبت شد');
     }
 
     public function show(Order $order)
@@ -71,5 +72,26 @@ class OrderController extends Controller
         }
 
         return response()->json('با موفقیت حذف شد');
+    }
+
+    public function print(Order $order)
+    {
+        Gate::authorize('view', $order);
+
+        // Load all necessary relationships
+        $order->load([
+            'address',
+            'coupon',
+            'sendType',
+            'payType',
+            'createdBy',
+            'user',
+            'payments',
+            'products.product.parent',
+            'products.product.attributeProducts',
+        ]);
+
+        // Return print-friendly view
+        return view('orders.print', compact('order'));
     }
 }
