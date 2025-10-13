@@ -36,7 +36,7 @@ class OrderController extends Controller
             return response()->json($exception->getMessage(), 419);
         }
 
-        return response()->json('Order created successfully');
+        return response()->json('سفارش با موفقیت ثبت شد');
     }
 
     public function show(Order $order)
