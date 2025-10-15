@@ -19,7 +19,6 @@ class CartResource extends JsonResource
     {
         return [
             'storage_id' => $this->storage_id,
-            'status' => Status::from((int) $this->status)?->label(),
             'address_id' => $this->address_id,
             'coupon' => $this->coupon,
             'desc' => $this->desc,
