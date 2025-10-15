@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Mortezaa97\Orders\Http\Resources;
 
+use App\Enums\Status;
 use App\Http\Resources\PaymentSimpleResource;
 use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
@@ -20,7 +21,7 @@ class OrderResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'status' => $this->status,
+            'status' => Status::from((int) $this->status)?->label(),
             'address' => AddressResource::make($this->whenLoaded('address')),
             'code' => $this->code,
             'coupon' => $this->coupon,

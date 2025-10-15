@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Mortezaa97\Orders\Http\Resources;
 
+use App\Enums\Status;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -17,7 +18,7 @@ class OrderSimpleResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'status' => $this->status,
+            'status' => Status::from((int) $this->status)?->label(),
             'code' => $this->code,
             'desc' => $this->desc,
             'total_count' => $this->total_count,

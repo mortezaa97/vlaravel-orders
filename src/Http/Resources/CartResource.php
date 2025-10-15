@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Mortezaa97\Orders\Http\Resources;
 
+use App\Enums\Status;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -18,7 +19,7 @@ class CartResource extends JsonResource
     {
         return [
             'storage_id' => $this->storage_id,
-            'status' => $this->status,
+            'status' => Status::from((int) $this->status)?->label(),
             'address_id' => $this->address_id,
             'coupon' => $this->coupon,
             'desc' => $this->desc,
