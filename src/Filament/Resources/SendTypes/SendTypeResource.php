@@ -25,7 +25,7 @@ class SendTypeResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
-    protected static ?string $recordTitleAttribute = 'روش های ارسال';
+    protected static ?string $recordTitleAttribute = 'title';
 
     protected static ?string $navigationLabel = 'روش های ارسال';
 

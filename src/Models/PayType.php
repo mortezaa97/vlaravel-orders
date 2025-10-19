@@ -32,7 +32,8 @@ class PayType extends Model
             $builder->orderByDesc('created_at');
         });
         static::creating(function ($item) {
-            $item->created_by = Auth::user()->id;
+            if (Auth::check())
+                $item->created_by = Auth::user()->id;
         });
     }
 

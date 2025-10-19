@@ -33,7 +33,7 @@ class OrderResource extends Resource
 
     protected static string|null|UnitEnum $navigationGroup = 'فروشگاه';
 
-    protected static ?string $recordTitleAttribute = 'سفارشات';
+    protected static ?string $recordTitleAttribute = 'createdBy.last_name';
 
     public static function form(Schema $schema): Schema
     {
