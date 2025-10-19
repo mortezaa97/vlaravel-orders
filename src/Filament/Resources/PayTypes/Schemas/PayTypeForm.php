@@ -17,9 +17,6 @@ class PayTypeForm
                         ->schema([
                             \App\Filament\Components\Form\TitleTextInput::create()->required(),
                             \App\Filament\Components\Form\DescTextarea::create(),
-                            \App\Filament\Components\Form\LogoFileUpload::create(),
-                            \App\Filament\Components\Form\CreatedBySelect::create()->required(),
-                            \App\Filament\Components\Form\UpdatedBySelect::create(),
 
                         ])
                         ->columns(12)
@@ -30,7 +27,9 @@ class PayTypeForm
             \Filament\Schemas\Components\Group::make()
                 ->schema([
                     \Filament\Schemas\Components\Section::make()
-                        ->schema([])
+                        ->schema([
+                            \App\Filament\Components\Form\LogoFileUpload::create(),
+                        ])
                         ->columns(12)
                         ->columnSpan(12),
                 ])

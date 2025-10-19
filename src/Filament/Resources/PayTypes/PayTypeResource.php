@@ -24,7 +24,17 @@ class PayTypeResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
-    protected static ?string $recordTitleAttribute = 'PayType';
+
+    protected static ?string $recordTitleAttribute = 'روش های پرداخت';
+
+    protected static ?string $navigationLabel = 'روش های پرداخت';
+
+    protected static ?string $modelLabel = 'روش پرداخت';
+
+    protected static ?string $pluralModelLabel = 'روش های پرداخت';
+
+    protected static string|null|\UnitEnum $navigationGroup = 'تنظیمات';
+
 
     public static function form(Schema $schema): Schema
     {

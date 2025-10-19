@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 
 class SendType extends Model
 {
@@ -29,6 +30,9 @@ class SendType extends Model
         parent::boot();
         static::addGlobalScope('order', function (Builder $builder) {
             $builder->orderByDesc('created_at');
+        });
+        static::creating(function ($item) {
+            $item->created_by = Auth::user()->id;
         });
     }
 

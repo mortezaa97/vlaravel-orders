@@ -17,6 +17,7 @@ use Mortezaa97\Orders\Filament\Resources\SendTypes\Pages\ListSendTypes;
 use Mortezaa97\Orders\Filament\Resources\SendTypes\Schemas\SendTypeForm;
 use Mortezaa97\Orders\Filament\Resources\SendTypes\Tables\SendTypesTable;
 use Mortezaa97\Orders\Models\SendType;
+use UnitEnum;
 
 class SendTypeResource extends Resource
 {
@@ -24,7 +25,15 @@ class SendTypeResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
-    protected static ?string $recordTitleAttribute = 'SendType';
+    protected static ?string $recordTitleAttribute = 'روش های ارسال';
+
+    protected static ?string $navigationLabel = 'روش های ارسال';
+
+    protected static ?string $modelLabel = 'روش ارسال';
+
+    protected static ?string $pluralModelLabel = 'روش های ارسال';
+
+    protected static string|null|UnitEnum $navigationGroup = 'تنظیمات';
 
     public static function form(Schema $schema): Schema
     {

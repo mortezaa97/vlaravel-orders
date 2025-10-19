@@ -40,7 +40,7 @@ class OrderResource extends JsonResource
             'user_name' => $this->user?->full_name,
             'user_cellphone' => $this->user?->cellphone,
             'tracking_code' => $this->tracking_code,
-            'products' => CartProductResource::collection($this->products),
+            'products' => CartProductResource::collection($this->whenLoaded('products')),
         ];
     }
 }

@@ -16,11 +16,8 @@ class SendTypeForm
                     \Filament\Schemas\Components\Section::make()
                         ->schema([
                             \App\Filament\Components\Form\TitleTextInput::create()->required(),
-                            \App\Filament\Components\Form\DescTextarea::create(),
-                            \App\Filament\Components\Form\LogoFileUpload::create(),
                             \App\Filament\Components\Form\DefaultPriceTextInput::create()->required(),
-                            \App\Filament\Components\Form\CreatedBySelect::create()->required(),
-                            \App\Filament\Components\Form\UpdatedBySelect::create(),
+                            \App\Filament\Components\Form\DescTextarea::create(),
 
                         ])
                         ->columns(12)
@@ -31,7 +28,9 @@ class SendTypeForm
             \Filament\Schemas\Components\Group::make()
                 ->schema([
                     \Filament\Schemas\Components\Section::make()
-                        ->schema([])
+                        ->schema([
+                            \App\Filament\Components\Form\LogoFileUpload::create(),
+                        ])
                         ->columns(12)
                         ->columnSpan(12),
                 ])
