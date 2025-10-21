@@ -21,15 +21,21 @@ class OrdersTable
                 \App\Filament\Components\Table\CodeTextColumn::create(),
                 \App\Filament\Components\Table\UserTextColumn::create(),
                 \App\Filament\Components\Table\AddressTextColumn::create(),
-                \Filament\Tables\Columns\TextColumn::make('coupon.name')->searchable(),
-                \Filament\Tables\Columns\TextColumn::make('delivery_price')->numeric()->sortable(),
-                \Filament\Tables\Columns\TextColumn::make('coupon_price')->numeric()->sortable(),
-                \Filament\Tables\Columns\TextColumn::make('total_price')->numeric()->sortable(),
-                \Filament\Tables\Columns\TextColumn::make('payment_type')->numeric()->sortable(),
+                \Filament\Tables\Columns\TextColumn::make('coupon.name')->searchable()
+                    ->label('کد تخفیف'),
+                \Filament\Tables\Columns\TextColumn::make('delivery_price')->numeric()->sortable()
+                    ->label('هزینه ارسال'),
+                \Filament\Tables\Columns\TextColumn::make('coupon_price')->numeric()->sortable()
+                    ->label('هزینه تخفیف'),
+                \Filament\Tables\Columns\TextColumn::make('total_price')->numeric()->sortable()
+                    ->label('مجموع قیمت'),
+                \Filament\Tables\Columns\TextColumn::make('payment_type')->numeric()->sortable()
+                    ->label('نوع پرداخت'),
                 \App\Filament\Components\Table\PaymentTextColumn::create(),
-                \Filament\Tables\Columns\TextColumn::make('tracking_code')->searchable(),
-                \Filament\Tables\Columns\TextColumn::make('sendType.title')->searchable(),
-                \Filament\Tables\Columns\TextColumn::make('payType.title')->searchable(),
+                \Filament\Tables\Columns\TextColumn::make('tracking_code')->searchable()
+                    ->label('کد پیگیری'),
+                \Filament\Tables\Columns\TextColumn::make('sendType.title')->searchable()
+                    ->label('نوع ارسال'),
                 \App\Filament\Components\Table\CreatedByTextColumn::create(),
                 \App\Filament\Components\Table\UpdatedByTextColumn::create(),
                 \App\Filament\Components\Table\DeletedAtTextColumn::create(),
