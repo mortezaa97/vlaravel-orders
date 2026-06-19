@@ -45,13 +45,13 @@ class OrderForm
                         ->schema([
                             \App\Filament\Components\Form\DeliveryPriceTextInput::create()
                                 ->required()
-                                ->columnSpan(4),
+                                ->columnSpan(6),
                             \App\Filament\Components\Form\CouponPriceTextInput::create()
                                 ->required()
-                                ->columnSpan(4),
+                                ->columnSpan(6),
                             \App\Filament\Components\Form\TotalPriceTextInput::create()
                                 ->required()
-                                ->columnSpan(4),
+                                ->columnSpan(6),
                             \Filament\Forms\Components\TextInput::make('payment_id')
                                 ->label('شناسه پرداخت')
                                 ->columnSpan(12),

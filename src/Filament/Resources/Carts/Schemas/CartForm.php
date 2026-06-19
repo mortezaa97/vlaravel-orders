@@ -15,10 +15,10 @@ class CartForm
                 ->schema([
                     \Filament\Schemas\Components\Section::make()
                         ->schema([
-                            \Filament\Forms\Components\TextInput::make('storage_id')->maxLength(255),
+                            \Filament\Forms\Components\TextInput::make('storage_id')->maxLength(255)->columnSpan(6),
                             \App\Filament\Components\Form\StatusSelect::create(),
                             \App\Filament\Components\Form\AddressTextInput::create(),
-                            \Filament\Forms\Components\TextInput::make('ip')->maxLength(45),
+                            \Filament\Forms\Components\TextInput::make('ip')->maxLength(45)->columnSpan(6),
                             \App\Filament\Components\Form\DescTextarea::create(),
                             \App\Filament\Components\Form\CouponSelect::create(),
                             \App\Filament\Components\Form\CreatedBySelect::create()->required(),

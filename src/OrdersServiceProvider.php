@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Mortezaa97\Orders;
 
+use Mortezaa97\Orders\Concerns\PublishesPackageAssets;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use Mortezaa97\Orders\Models\Cart;
@@ -17,6 +18,8 @@ use Mortezaa97\Orders\Policies\SendTypePolicy;
 
 class OrdersServiceProvider extends ServiceProvider
 {
+    use PublishesPackageAssets;
+
     /**
      * Bootstrap the application services.
      */
@@ -41,12 +44,10 @@ class OrdersServiceProvider extends ServiceProvider
             ], 'config');
 
             $this->publishes([
-                __DIR__ . '/../database/migrations' => database_path('migrations'),
-            ], 'migrations');
-
-            $this->publishes([
                 __DIR__ . '/../database/seeders' => database_path('seeders'),
             ], 'orders-seeders');
+
+            $this->publishPackageAssets('orders');
         }
     }
 
